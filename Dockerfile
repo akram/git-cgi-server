@@ -12,5 +12,5 @@ COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/server.key 
 COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/server.crt /server.crt
 COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/repos /
 RUN ls -la /
-ENTRYPOINT ["/git-cgi-server", "--cert-file=/server.crt", "--key-file=/server.key", "/repos"]
+CMD ["/git-cgi-server", "--cert-file=/server.crt", "--key-file=/server.key", "/repos"]
 
