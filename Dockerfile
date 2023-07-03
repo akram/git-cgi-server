@@ -13,6 +13,6 @@ COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/server.crt 
 COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/repos /repos/
 RUN yum --nodocs install -y --setopt=install_weak_deps=False git 
 RUN which git
-CMD ["/usr/bin/git-cgi-server", "--cert-file=/server.crt", "--key-file=/server.key", "/repos"]
+ENTRYPOINT ["/usr/bin/git-cgi-server", "--cert-file=/server.crt", "--key-file=/server.key", "--export-all", "/repos"]
 
 
