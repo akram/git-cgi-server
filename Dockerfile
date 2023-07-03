@@ -10,9 +10,9 @@ FROM registry.access.redhat.com/ubi8/ubi
 COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/git-cgi-server /usr/bin
 COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/server.key /server.key
 COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/server.crt /server.crt
-COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/repos /repos/
+COPY --from=go-init-builder /go/src/github.com/pasela/git-cgi-server/repos /tmp/repos/
 RUN yum --nodocs install -y --setopt=install_weak_deps=False git 
 RUN which git
-ENTRYPOINT ["/usr/bin/git-cgi-server", "--cert-file=/server.crt", "--key-file=/server.key", "--export-all", "/repos"]
+ENTRYPOINT ["/usr/bin/git-cgi-server", "--cert-file=/server.crt", "--key-file=/server.key", "--export-all", "/tmp/repos"]
 
 
